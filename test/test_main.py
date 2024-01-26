@@ -1,4 +1,9 @@
 from src import main
+import pytest
+
+pytest_mark = pytest.mark.parametrize(
+
+)
 
 
 def setup_event():
