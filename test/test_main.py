@@ -47,48 +47,34 @@ pytest_mark_beautify_json = pytest.mark.parametrize(
 
 
 def setup_book():
-    uid = 0
+    isbn = 0
     title = ""
     category = ""
-    author = ""
-    year = 00
-    page_count = 00
     price = 0.0
     return main.Book(
-        uid=uid, title=title, category=category, author=author, year=year, page_count=page_count, price=price
+        uid=isbn, title=title, category=category, price=price
     )
 
 
 def setup_customer():
-    uid = 1
+    customer_ID = 1
     address = ""
-    return main.Customer(uid=uid, address=address)
+    return main.Customer(uid=customer_ID, address=address)
 
 
 def setup_event():
     customer = setup_customer()
 
-    customer_uid = customer.uid
+    customer_ID = customer.customer_ID
     customer_address = customer.address
-    action = main.EventType(3)
+    action = main.EventType.ADD_TO_CART
     item = setup_book()
     return main.Event(
-        customer_uid=customer_uid,
+        customer_uid=customer_ID,
         customer_address=customer_address,
         action=action,
         item=item
     )
-
-
-'''
-def setup_event_store():
-    db = {}
-    return main.EventStore(db=db)
-
-def test_class_event_store():
-    res = setup_event_store()
-    assert isinstance(res, main.EventStore)
-'''
 
 
 def test_class_book():
