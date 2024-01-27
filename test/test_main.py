@@ -3,6 +3,8 @@ from datetime import datetime
 from src import main
 import pytest
 
+json_file = '../src/test_people_data.txt'
+
 victor = {
     'name': 'Victor',
     'age': 32,
@@ -109,4 +111,13 @@ def test_beautify_a_python_dict_for_printing(py_dict, beautified_json):
 
 
 def test_append_to_the_json_file():
-    ...
+
+    with open(json_file, 'w') as f:
+        f.close()
+
+    main.append_to_the_json_file(existing_file_path=json_file, python_dict=victor)
+
+    with open(json_file, 'r') as f:
+        data = f.read()
+
+    assert data == '{"name": "Victor", "age": 32, "male": true, "height": 1.83}'

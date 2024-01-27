@@ -7,6 +7,8 @@ __pycache__/
 /.idea
 *.pyc
 src/people_data.txt
+src/test_people_data.txt
+qodana.yaml
 
 # C extensions
 *.so

@@ -77,6 +77,8 @@ def beautify_a_python_dict_for_printing(python_dict):
 
 def main():
 
+    json_file = 'people_data.txt'
+
     victor = {
         'name': 'Victor',
         'age': 32,
