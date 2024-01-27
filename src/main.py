@@ -1,33 +1,9 @@
 """Victor's Books"""
 from datetime import datetime
 import json
+import sqlite3
 
 '''
-a) Open a .json file
-
-        with open('file_path.json', 'r') as f:
-            data = json.load(f)
-
-b) Convert a python dict to a .json string
-
-        py_dict = {
-            'key': 'value',
-        }
-        
-        json_string = json.dumps(json_str)
-
-c) Write to a .json file
-
-        py_dict = {
-            'key': 'value',
-        }
-        
-        with open('file_path.txt', 'w') as json_file:
-            json.dump(py_dict, json_file)
-    
-d) Pretty print
-
-        print(json.dumps(py_dict, indent=4, sort_keys=True))
 '''
 
 
@@ -80,10 +56,23 @@ class EventStore:
 
     metadata: list
     payload: str
+    db = dict
 
-    def __init__(self, metadata, payload):
-        self.metadata = metadata
-        self.payload = payload
+    def __init__(self, db):
+        self.db = db
+
+
+def append_to_the_json_file(existing_file_path, python_dict):
+    with open(existing_file_path, 'a') as json_file:
+        json.dump(python_dict, json_file)
+
+
+def convert_a_python_dict_to_a_json_string(python_dict):
+    return json.dumps(python_dict)
+
+
+def beautify_a_python_dict_for_printing(python_dict):
+    return json.dumps(python_dict, indent=4, sort_keys=True)
 
 
 def main():
@@ -101,13 +90,6 @@ def main():
         'male': True,
         'height': 1.74
     }
-
-    # json_string = json.dumps(py_dict)
-
-    with open('people_data.txt', 'a') as json_file:
-        json.dump(george, json_file)
-
-    # print(json.dumps(py_dict, indent=4, sort_keys=True))
 
 
 if __name__ == '__main__':
