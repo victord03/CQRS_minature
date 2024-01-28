@@ -1,5 +1,5 @@
 """Victor's Books"""
-from datetime import datetime
+from datetime import datetime, date
 import json
 from enum import Enum
 
@@ -23,11 +23,11 @@ class Customer:
     """Personal data. To complete any transaction we assume a valid payment method present in the account
     which does not appear here."""
 
-    customer_ID: int
+    customer_id: int
     address: str
 
     def __init__(self, uid, address):
-        self.customer_ID = uid
+        self.customer_id = uid
         self.address = address
 
 
@@ -40,30 +40,33 @@ class EventType(Enum):
 class Event:
     """Inbound command (requests storing of information and does not return any value)"""
 
-    timestamp: datetime
-    event_ID: int
-    customer_ID: int
+    timestamp: str
+    event_id: int
+    customer_id: int
     customer_address: str
     action: EventType
     item: Book
 
     def __init__(self, customer_uid, customer_address, action, item):
-        self.timestamp = datetime.now()
-        self.event_ID = int(str(self.timestamp)[-3:])
-        self.customer_ID = customer_uid
+        self.timestamp = str(date.today())
+        self.event_id = int(str(datetime.now())[-3:])
+        self.customer_id = customer_uid
         self.customer_address = customer_address
         self.action = action
         self.item = item
+
+    def __str__(self):
+        return f'Event ID {self.event_id}: (Date: {self.timestamp}, Event type:{self.action}, Book title: {self.item.title})'
 
 
 def generate_event_log(event) -> dict:
 
     item = event.item
-    event_meta_data = (item.action, item.timestamp, item.customer_ID)
-    event_payload = (item.customer_ID, item.price, item.author, item.year, item.title)
+    event_meta_data = (item.action, item.timestamp, item.customer_id)
+    event_payload = (item.customer_id, item.price, item.author, item.year, item.title)
 
     return dict(
-        key=event.customer_ID,
+        key=event.customer_id,
         value={
             'event_meta_data': event_meta_data,
             'event_payload': event_payload
@@ -109,7 +112,7 @@ def main():
         category='Professional',
         price=33.45
     )
-    event = Event(customer.customer_ID, customer.address, action=2, item=book)
+    event = Event(customer.customer_id, customer.address, action=2, item=book)
     print(event)
 
 

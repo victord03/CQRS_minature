@@ -59,20 +59,20 @@ def setup_book():
 
 
 def setup_customer():
-    customer_ID = 1
+    customer_id = 1
     address = ""
-    return main.Customer(uid=customer_ID, address=address)
+    return main.Customer(uid=customer_id, address=address)
 
 
 def setup_event():
     customer = setup_customer()
 
-    customer_ID = customer.customer_ID
+    customer_id = customer.customer_id
     customer_address = customer.address
     action = main.EventType.ADD_TO_CART
     item = setup_book()
     return main.Event(
-        customer_uid=customer_ID,
+        customer_uid=customer_id,
         customer_address=customer_address,
         action=action,
         item=item
