@@ -56,7 +56,7 @@ class Event:
         self.item = item
 
     def __str__(self):
-        return f'Event ID {self.event_id}: (Date: {self.timestamp}, Event type:{self.action}, Book title: {self.item.title})'
+        return f'[Event ID {self.event_id}: (Date: {self.timestamp}, Event type:{self.action}, Book title: {self.item.title})]'
 
 
 def generate_event_log(event) -> dict:
@@ -66,12 +66,16 @@ def generate_event_log(event) -> dict:
     event_payload = (item.customer_id, item.price, item.author, item.year, item.title)
 
     return dict(
-        key=event.customer_id,
+        key=event.event_id,
         value={
             'event_meta_data': event_meta_data,
             'event_payload': event_payload
         }
     )
+
+
+def store(file_path, event_log) -> None:
+    append_to_the_json_file(file_path, event_log)
 
 
 def append_to_the_json_file(existing_file_path, python_dict) -> None:
