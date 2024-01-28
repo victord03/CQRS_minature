@@ -1,9 +1,11 @@
 from datetime import datetime
 
+from os import chdir
+
 from src import main
 import pytest
 
-json_file = '../src/test_people_data.txt'
+json_file = 'test_people_data.txt'
 
 victor = {
     'name': 'Victor',
@@ -103,6 +105,9 @@ def test_beautify_a_python_dict_for_printing(py_dict, beautified_json):
 
 
 def test_append_to_the_json_file():
+
+    chdir('./src')
+    # chdir('src')
 
     with open(json_file, 'w') as f:
         f.close()
