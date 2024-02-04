@@ -9,6 +9,8 @@ __pycache__/
 src/people_data.txt
 src/test_people_data.txt
 qodana.yaml
+src/quick_save.txt
+src/test_quick_save.txt
 
 # C extensions
 *.so
