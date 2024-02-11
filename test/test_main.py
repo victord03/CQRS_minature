@@ -5,46 +5,42 @@ from os import chdir
 from src import main
 import pytest
 
-json_file = 'test_people_data.txt'
+json_file = "test_people_data.txt"
 
-victor = {
-    'name': 'Victor',
-    'age': 32,
-    'male': True,
-    'height': 1.83
-}
+victor = {"name": "Victor", "age": 32, "male": True, "height": 1.83}
 
-george = {
-    'name': 'George',
-    'age': 23,
-    'male': True,
-    'height': 1.74
-}
+george = {"name": "George", "age": 23, "male": True, "height": 1.74}
 
 pytest_mark_jsons = pytest.mark.parametrize(
-    'py_dict,json_string',
+    "py_dict,json_string",
     [
         (victor, '{"name": "Victor", "age": 32, "male": true, "height": 1.83}'),
-        (george, '{"name": "George", "age": 23, "male": true, "height": 1.74}')
-    ]
+        (george, '{"name": "George", "age": 23, "male": true, "height": 1.74}'),
+    ],
 )
 
 pytest_mark_beautify_json = pytest.mark.parametrize(
-    'py_dict, beautified_json',
+    "py_dict, beautified_json",
     [
-        (victor, '''{
+        (
+            victor,
+            """{
     "age": 32,
     "height": 1.83,
     "male": true,
     "name": "Victor"
-}'''),
-        (george, '''{
+}""",
+        ),
+        (
+            george,
+            """{
     "age": 23,
     "height": 1.74,
     "male": true,
     "name": "George"
-}'''),
-    ]
+}""",
+        ),
+    ],
 )
 
 
@@ -53,9 +49,7 @@ def setup_book():
     title = ""
     category = ""
     price = 0.0
-    return main.Book(
-        uid=isbn, title=title, category=category, price=price
-    )
+    return main.Book(uid=isbn, title=title, category=category, price=price)
 
 
 def setup_customer():
@@ -75,7 +69,7 @@ def setup_event():
         customer_uid=customer_id,
         customer_address=customer_address,
         action=action,
-        item=item
+        item=item,
     )
 
 
@@ -106,15 +100,15 @@ def test_beautify_a_python_dict_for_printing(py_dict, beautified_json):
 
 def test_append_to_the_json_file():
 
-    chdir('./src')
+    chdir("./src")
     # chdir('src')
 
-    with open(json_file, 'w') as f:
+    with open(json_file, "w") as f:
         f.close()
 
     main.append_to_the_json_file(existing_file_path=json_file, python_dict=victor)
 
-    with open(json_file, 'r') as f:
+    with open(json_file, "r") as f:
         data = f.read()
 
     assert data == '{"name": "Victor", "age": 32, "male": true, "height": 1.83}'

@@ -1,4 +1,5 @@
 """Victor's Books"""
+
 from datetime import datetime, date
 import json
 from enum import Enum
@@ -33,6 +34,7 @@ class Customer:
 
 class EventType(Enum):
     """Types of Events"""
+
     ADD_TO_CART = 1
     PURCHASE = 2
 
@@ -56,7 +58,7 @@ class Event:
         self.item = item
 
     def __str__(self):
-        return f'[Event ID {self.event_id}: (Date: {self.timestamp}, Event type:{self.action}, Book title: {self.item.title})]'
+        return f"[Event ID {self.event_id}: (Date: {self.timestamp}, Event type:{self.action}, Book title: {self.item.title})]"
 
 
 def generate_event_log(event) -> dict:
@@ -67,10 +69,7 @@ def generate_event_log(event) -> dict:
 
     return dict(
         key=event.event_id,
-        value={
-            'event_meta_data': event_meta_data,
-            'event_payload': event_payload
-        }
+        value={"event_meta_data": event_meta_data, "event_payload": event_payload},
     )
 
 
@@ -79,7 +78,7 @@ def store(file_path, event_log) -> None:
 
 
 def append_to_the_json_file(existing_file_path, python_dict) -> None:
-    with open(existing_file_path, 'a') as json_file:
+    with open(existing_file_path, "a") as json_file:
         json.dump(python_dict, json_file)
 
 
@@ -93,32 +92,17 @@ def beautify_a_python_dict_for_printing(python_dict) -> str:
 
 def main():
 
-    json_file = 'people_data.txt'
+    json_file = "people_data.txt"
 
-    victor = {
-        'name': 'Victor',
-        'age': 32,
-        'male': True,
-        'height': 1.83
-    }
+    victor = {"name": "Victor", "age": 32, "male": True, "height": 1.83}
 
-    george = {
-        'name': 'George',
-        'age': 23,
-        'male': True,
-        'height': 1.74
-    }
+    george = {"name": "George", "age": 23, "male": True, "height": 1.74}
 
     customer = Customer(uid=8, address="Altair St. 2, Brooklyn")
-    book = Book(
-        uid=1,
-        title='Stables & Horses',
-        category='Professional',
-        price=33.45
-    )
+    book = Book(uid=1, title="Stables & Horses", category="Professional", price=33.45)
     event = Event(customer.customer_id, customer.address, action=2, item=book)
     print(event)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

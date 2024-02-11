@@ -15,11 +15,10 @@ def get_current_date() -> datetime.today:
 
 
 def create_event() -> dict:
-    return {get_current_timestamp(): {'metadata': ''}}
+    return {get_current_timestamp(): {"metadata": ""}}
 
 
 def store_event(filepath: str, event: dict) -> None:
 
-    with open(filepath, 'a') as f:
+    with open(filepath, "a") as f:
         json.dump(event, f, indent=None)
-
